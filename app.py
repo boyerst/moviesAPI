@@ -21,10 +21,6 @@ def hello():
   return 'testing movies API server'
 
 
-@app.route('/test_json')
-def get_json():
-  return jsonify(['we', 'will', 'make', 'a', 'flask', 'app'])
-
 
 
 
