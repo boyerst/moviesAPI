@@ -1,5 +1,7 @@
 from flask import Flask, jsonify
 
+from resources.movies import movies
+
 import models
 
 
@@ -8,6 +10,8 @@ PORT=8000
 
 
 app = Flask(__name__)
+
+app.register_blueprint(movies, url_prefix='/api/v1/movies')
 
 
 
