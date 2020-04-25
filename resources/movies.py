@@ -1,6 +1,8 @@
 import models
 
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
+
+from playhouse.shortcuts import model_to_dict 
 
 movies = Blueprint('movies', 'movies')
 
@@ -19,4 +21,10 @@ def create_movie():
   print(payload)
   new_movie=models.Movie.create(title=payload['title'], genre=payload['genre'], release_year=payload['release_year'])
   print(new_movie)
-  return "movies create route hitting"
+  print(dir(new_movie))
+  movie_dict = model_to_dict(new_movie)
+  return jsonify(
+    data=movie_dict,
+    message='you created a movie',
+    status=200             
+  ), 201
