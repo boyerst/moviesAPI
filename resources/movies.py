@@ -17,4 +17,6 @@ def movies_index():
 def create_movie():
   payload = request.get_json()
   print(payload)
+  new_movie=models.Movie.create(title=payload['title'], genre=payload['genre'], release_year=payload['release_year'])
+  print(new_movie)
   return "movies create route hitting"
