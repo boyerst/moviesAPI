@@ -33,3 +33,16 @@ def create_movie():
     message='you created a movie',
     status=200             
   ), 201
+
+
+# DESTROY
+@movies.route('/<id>', methods=['DELETE']) 
+def delete_movie(id):
+  delete_query = models.Movie.delete().where(models.Movie.id == id)
+  num_of_rows_deleted = delete_query.execute()
+  print(num_of_rows_deleted)
+  return jsonify(
+    data={},
+    message="Successfully deleted {} movie with id {}".format(num_of_rows_deleted, id),
+    status=200
+  ), 200
