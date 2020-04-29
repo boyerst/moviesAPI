@@ -15,7 +15,7 @@ class User(UserMixin, Model):
 
 
 class Movie(Model):
-  title = CharField()
+  title = ForeignKeyField(User, backref='movies')
   genre = CharField()
   release_year = IntegerField()
   created_at: DateTimeField(default=datetime.datetime.now)
