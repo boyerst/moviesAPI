@@ -46,3 +46,22 @@ def delete_movie(id):
     message="Successfully deleted {} movie with id {}".format(num_of_rows_deleted, id),
     status=200
   ), 200
+
+
+  # UPDATE /api
+@movies.route('/<id>', methods=['PUT'])
+def update_movie(id):
+  payload = request.get_json()
+  update_query = models.Movie.update(
+    title=payload['title'], 
+    genre=payload['genre'],
+    release_year=payload['release_year'] 
+  ).where(models.Movie.id == id)
+  num_of_rows_modified = update_query.execute()
+  updated_movie = models.Movie.get_by_id(id)
+  updated_movie_dict = model_to_dict(updated_movie)
+  return jsonify(
+    data=updated_movie_dict,
+    message=f"successfully updated movie with id {id}",
+    status=200
+  ), 200
