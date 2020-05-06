@@ -6,7 +6,7 @@ from flask_bcrypt import generate_password_hash, check_password_hash
 
 from playhouse.shortcuts import model_to_dict
 
-from flask_login import login_user
+from flask_login import login_user, current_user, logout_user
 
 
 users = Blueprint('users', 'users')
@@ -79,6 +79,19 @@ def login():
       message="Email or password is incorrect", 
       status=401
     ), 401
+
+
+
+@users.route('/logout', methods=['GET'])
+def logout():
+  logout_user()
+  return jsonify(
+    data={}, 
+    message="Successfully logged out.",
+    status=200
+  ), 200
+
+
 
 
 # TEMPORARY LIST USER ROUTE
