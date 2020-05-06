@@ -15,10 +15,11 @@ class User(UserMixin, Model):
 
 
 class Movie(Model):
-  title = ForeignKeyField(User, backref='movies')
+  viewer = ForeignKeyField(User, backref='movies')
+  title = CharField()
   genre = CharField()
   release_year = IntegerField()
-  created_at: DateTimeField(default=datetime.datetime.now)
+  created_at = DateTimeField(default=datetime.datetime.now)
 
   class Meta:
     database = DATABASE

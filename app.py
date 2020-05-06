@@ -23,6 +23,29 @@ login_manager = LoginManager()
 
 login_manager.init_app(app) #passing in app object, defined above
 
+
+@login_manager.user_loader
+def load_user(user_id):
+  try:
+    print("loading the following user")
+    user = models.User.get_by_id(user_id) # IMPORTANT CHANGE 
+
+    return user 
+  except models.DoesNotExist: 
+    return None
+
+@login_manager.unauthorized_handler
+def unauthorized():
+  return jsonify(
+    data={
+      'error': "User not logged in"
+    },
+    message='You must be logged in to access that resource',
+    status=401
+  ), 401
+
+  
+
 CORS(movies, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(users, origins=['http://localhost:3000'], supports_credentials=True)
 
