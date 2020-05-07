@@ -15,7 +15,7 @@ class User(UserMixin, Model):
 
 
 class Movie(Model):
-  viewer = ForeignKeyField(User, backref='movies')
+  viewer_id = ForeignKeyField(User, backref='movies')
   title = CharField()
   genre = CharField()
   release_year = IntegerField()

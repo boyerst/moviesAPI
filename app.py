@@ -10,6 +10,8 @@ from flask_cors import CORS
 
 from flask_login import LoginManager
 
+from flask_login import login_user, current_user, logout_user
+
 
 DEBUG=True
 PORT=8000
@@ -44,7 +46,7 @@ def unauthorized():
     status=401
   ), 401
 
-  
+
 
 CORS(movies, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(users, origins=['http://localhost:3000'], supports_credentials=True)

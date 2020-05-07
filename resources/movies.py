@@ -4,7 +4,7 @@ from flask import Blueprint, request, jsonify
 
 from playhouse.shortcuts import model_to_dict 
 
-from flask_login import current_user
+from flask_login import current_user, login_required
 
 
 
@@ -28,8 +28,8 @@ def movies_index():
 def create_movie():
   payload = request.get_json()
   new_movie=models.Movie.create(
-    viewer=current_user.id,
     title=payload['title'], 
+    viewer_id=current_user.id,
     genre=payload['genre'], 
     release_year=payload['release_year']
     )
